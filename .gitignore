@@ -1,0 +1,28 @@
+# Keil 忽略文件
+Objects/
+Listings/
+*.o
+*.d
+*.axf
+*.hex
+*.bin
+*.htm
+*.map
+*.lnp
+*.sct
+*.dep
+*.uvopt
+*.uvgui
+
+# STM32CubeIDE 忽略文件
+Debug/
+Release/
+*.elf
+*.bin
+*.hex
+*.list
+*.map
+.cproject
+.project
+.settings/
+.launch

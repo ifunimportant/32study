@@ -14,6 +14,7 @@ Listings/
 *.uvopt
 *.uvgui
 *.exe
+*.json
 
 # STM32CubeIDE 忽略文件
 Debug/
@@ -28,9 +29,8 @@ Release/
 .settings/
 .launch
 .vscode/tasks.json
-.vscode/tasks.json
 .calude
 .vscode
-.claude/settings.local.json
+.claude/
 .vscode/tasks.json
 

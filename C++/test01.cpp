@@ -2,6 +2,8 @@
 using namespace std;
 
 int main() {
-    cout << "hello C++" << endl;
+    cout << "我是天才" << endl;
     return 0;
 }
+
+

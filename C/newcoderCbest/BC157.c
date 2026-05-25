@@ -14,9 +14,9 @@ long long getnum(long long n);
 int main() {
 long long n;
 int flag=0;
-scanf("%I64d",&n);
+scanf("%lld",&n);
 n=getnum(n);
-printf("%I64d\n",n);
+printf("%lld\n",n);
 if(n%2!=0)
   for(long long i=3;i<=sqrt(n);i=i+2)
   {

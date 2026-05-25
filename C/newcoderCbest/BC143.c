@@ -5,7 +5,7 @@ int main() {
     int m=0;
     char ch[100];
     fgets(ch,100,stdin);
-   // printf("%s\n",ch);
+    // printf("%s\n",ch);
     // m=strlen(ch);
     // printf ("%d\n",m);
     
@@ -21,13 +21,11 @@ int main() {
     {
     
         
-        if(ch[i]!=' '||ch[i]!='\n')
+        if(ch[i]!=' '&&ch[i]!='\n')
             m++;
-
         i++;
     }
     printf("%d",m);
 
  
 }
-

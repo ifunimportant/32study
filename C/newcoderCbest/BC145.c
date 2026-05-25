@@ -1,33 +1,30 @@
 #include <stdio.h>
 #include <string.h>
-int outnumber(int n,int m,int x, int y,char sh[n][m]);
+int chcmp(char user[],char right[]);
 int main() {
-    int m=0;
-    char ch[100];
-    fgets(ch,100,stdin);
-   // printf("%s\n",ch);
-    // m=strlen(ch);
-    // printf ("%d\n",m);
-    
-    // for (int i = 0; i <= m; i++)
-    // {
-    //     if(ch[i]=='0')
-    //     printf("no");
-    //     else
-    //     printf ("%c\n",ch[i]);
-    // }
-     int i=0;
-    while(ch[i]!='\0')
+    int flag=0;
+    char user[100];
+    char passwords[100];
+    scanf ("%s %s",user,passwords);
+    if(chcmp(user,"admin")==0)
     {
-    
-        
-        if(ch[i]!=' '||ch[i]!='\n')
-            m++;
-
-        i++;
+        if(chcmp(passwords,"admin")==0)
+        flag=1;
     }
-    printf("%d",m);
+    if(flag==1)
+    printf("Login Success!");
+    else
+    printf("Login Fail!");
+}
 
- 
+int chcmp(char user[],char right[])
+{
+    int i;
+   for ( i = 0; user[i]!='\0'&&right[i]!='\0'; i++)
+   {
+    if(user[i]!=right[i])
+    return 1;
+   }
+   return !(user[i]=='\0'&&right[i]=='\0');
 }
 

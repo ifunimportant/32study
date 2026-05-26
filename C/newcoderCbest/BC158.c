@@ -41,7 +41,7 @@ int main() {
 void getch(char ch[],char ch1[])
 {
   int i=0;
-  while(ch[i])
+  while(ch[i])//get len;
   {
     ch1[i]=ch[i];
     i++;
@@ -97,7 +97,8 @@ void compute(char ch[],char ch1[],int n)
 {
   chartoint(ch);
   chartoint(ch1);
-  for(int i=0;i<20;i++)
+  printf("chartoint\nch=%s\nch1=%s",ch,ch1);
+  for(int i=0;i<20;i++)//16进制不满足
   {
     ch[i]=ch[i]+ch1[i];
     if(ch[i]>n-1)

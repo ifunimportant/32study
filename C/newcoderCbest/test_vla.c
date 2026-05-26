@@ -1,7 +1,13 @@
 #include <stdio.h>
 int main() {
-    int n = 5, m = 5;
-    char a[n][m]; // VLA 声明
-    printf("VLA is supported!\n");
+    int n = 0, m = 0;
+    char a[6]={1,0,2,3,4,'\0'};
+
+    while (a[n])
+    {
+       m++;
+       n++;
+    }
+    printf("%d",m);
     return 0;
 }

@@ -13,7 +13,7 @@ strcmp(ch,ch1)函数比较两个字符串是否相等，如果相等则是回文
 */
 void getch(char ch[],char ch1[]);
 void chartoint(char ch[]);
-void inttochar(char ch[]);
+void inttochar(char ch[],int n);
 //运算函数，两个数按照输入的进位要求，先从字符串转换为整数，然后进行加法运算，最后再转换回字符串
 void compute(char ch[],char ch1[],int n);
 int main() {
@@ -76,8 +76,10 @@ void chartoint(char ch[])
   }
   ch[i]=0;//字符串结束标志
 }
-
-void inttochar(char ch[])
+/*
+*@n  n-ch ues bit
+*/
+void inttochar(char ch[],int n)
 {
   int i=0;
   while(ch[i])
@@ -97,7 +99,6 @@ void compute(char ch[],char ch1[],int n)
 {
   chartoint(ch);
   chartoint(ch1);
-  printf("chartoint\nch=%s\nch1=%s",ch,ch1);
   for(int i=0;i<20;i++)//16进制不满足
   {
     ch[i]=ch[i]+ch1[i];

@@ -23,17 +23,23 @@ int main() {
     scanf("%s",ch);
     getch(ch,ch1);
     while(strcmp(ch,ch1)!=0)
-    {
-      time++;
-      compute(ch,ch1,n);
-       getch(ch,ch1);
-      if(time>30)
+    {     
+      if(time>=30)
       {
-        printf("Impossible!");
+        printf("Impossible!\n");
+        printf("STEP%d=%s",time,ch);
         return 0;
       }
+      time++;
+    //  printf("STEP%d:%25s+%25s=",time,ch,ch1);
+      compute(ch,ch1,n);
+       getch(ch,ch1);
+    //  printf("%25s",ch1);
+
+    // printf("\t%25s\n",ch);
     }
-    printf("STEP=%d",time);
+    printf("STEP=%d\n",time);
+    printf("%s",ch);
 
 }
 
@@ -53,8 +59,8 @@ void getch(char ch[],char ch1[])
     ch1[j]=ch1[i-1-j];
     ch1[i-1-j]=t;
   }
-  printf("%s\n",ch1);
-  printf("%s\n",ch);
+//  printf("%s\n",ch1);
+ // printf("%s\n",ch);
 }
 
 void chartoint(char ch[])
@@ -81,25 +87,28 @@ void chartoint(char ch[])
 */
 void inttochar(char ch[],int n)
 {
-  int i=0;
-  while(ch[i])
+  //printf("\ninto_inttochar\n");
+  for(int i=0;i<n;i++)
   {
+  
     if(ch[i]>=0&&ch[i]<=9)
     ch[i]=ch[i]+'0';//将整数转换为字符
     else if (ch[i]>=10&&ch[i]<=15)
       {
         ch[i]=ch[i]-10+'A';//将整数转换为字符
       }
-    i++;
+     // printf("%c\n",ch[i]);
   }
-  ch[i]='\0';//字符串结束标志
+  ch[n]='\0';//字符串结束标志
 }
 
 void compute(char ch[],char ch1[],int n)
 {
+  int x=strlen(ch);
   chartoint(ch);
   chartoint(ch1);
-  for(int i=0;i<20;i++)//16进制不满足
+  int i=0;
+  while(!(i>=x&&ch[i]==0))//16进制不满足
   {
     ch[i]=ch[i]+ch1[i];
     if(ch[i]>n-1)
@@ -107,6 +116,8 @@ void compute(char ch[],char ch1[],int n)
       ch[i]=ch[i]%n;
       ch[i+1]++;
     }
+    i++;
   }
-  inttochar(ch);
+
+  inttochar(ch,i);
 }

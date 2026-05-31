@@ -18,7 +18,7 @@ void inttochar(char ch[],int n);
 void compute(char ch[],char ch1[],int n);
 int main() {
     int n,time=0;
-    char ch[20]={0},ch1[20]={0};
+    char ch[50]={0},ch1[50]={0};
     scanf("%d",&n);//输入进制
     scanf("%s",ch);
     getch(ch,ch1);

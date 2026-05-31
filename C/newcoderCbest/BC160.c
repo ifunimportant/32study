@@ -12,8 +12,6 @@ typedef struct
 }ret,*pret;
 ret getret(ll x);
 
-//运算函数，两个数按照输入的进位要求，先从字符串转换为整数，然后进行加法运算，最后再转换回字符串
-
 int main() {
     int x=0;
     ll n;
@@ -22,9 +20,9 @@ int main() {
     scanf("%d",&x);
     for (int i = 0; i < x; i++)
     {
-      scanf("%I64d",&n);
+      scanf("%lld",&n);
       j=getret(n);
-      printf("%I64d %I64d",j.i,j.j);
+      printf("%lld %lld\n",j.i,j.j);
     }
     
  
@@ -40,8 +38,8 @@ ret getret(ll x)
     if(x%2==1)
     {
       rnt++;
-      x=x/2;
     }
+    x=x/2;
   }
 
   ret l;
@@ -50,3 +48,6 @@ ret getret(ll x)
   l.j=(j<<rnt)-1;
   return l;
 }
+
+
+

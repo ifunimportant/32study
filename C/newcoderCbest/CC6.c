@@ -1,23 +1,30 @@
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-typedef long long ll;
-//实现
-/*
-*/
-#define num 31
-
-
-ll getnum(int n);
-
-int main() {
-   char ch[num];
-   fgets(ch,num,stdin);
-int add=0;
-for (int i = 0; ch[i]!='\0'; i++)
+#include<stdio.h>
+void sort(int *array, int n)
 {
-   add++;
+    for(int i=0; i<n-1; i++)
+    {
+        for(int j=i+1; j<n; j++)
+        {
+            if(array[i] > array[j])
+            {
+                int tmp = array[i];
+                array[i] = array[j];
+                array[j] = tmp;
+            }
+        }
+    }
+    for(int i=0; i<n; i++)
+    {
+        printf("%d ", array[i]);
+    }
 }
- printf("%d",add);
+int main()
+{
+    int n, i, arr[100];
+    scanf("%d", &n);
+    for(i=0; i<n; i++)
+    {
+        scanf("%d ", &arr[i]);
+    }
+    sort(arr, n);
 }
-

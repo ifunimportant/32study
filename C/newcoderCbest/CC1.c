@@ -5,13 +5,14 @@ typedef long long ll;
 //实现
 /*
 */
+#define num 31
 
 
 ll getnum(int n);
 
 int main() {
-   char ch[100];
-   fgets(ch,100,stdin);
+   char ch[num];
+   fgets(ch,num,stdin);
 int add=0;
 for (int i = 0; ch[i]!='\0'; i++)
 {

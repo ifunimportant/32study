@@ -48,7 +48,7 @@ int array_writedate(array*p , int pos , data_t value)
 {
   if(pos<0||pos>p->last-1||p->last>=N)
   {
-    return 0;//插入失败
+    return 404;//插入失败
   }
   else
   {
@@ -58,8 +58,24 @@ int array_writedate(array*p , int pos , data_t value)
       p->sums[i]=p->sums[i-1];
     }
     p->sums[pos]=value;
-    return 1;
+    return 666;
   }
+}
+
+//删除制定位的数据
+int array_delete(array*p,int pos)
+{
+  if(pos<0||pos>p->last-1)
+  return 404;
+  else{
+    for(int i=pos;i<p->last-2;i++)
+    {
+      p->sums[i]=p->sums[i+1];
+    }
+    p->sums[p->last-1]=0;
+    p->last--;
+  }
+  return 666;
 }
 
 //释放一个数组

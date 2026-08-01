@@ -31,6 +31,9 @@ int array_readdate(array*p , int n);
 //写函数，往位置上写入数据
 int array_writedate(array*p , int pos , data_t value);
 
+//删除制定位置数据
+int array_delete(array*p,int pos);
+
 
 
 

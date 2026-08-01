@@ -1,4 +1,5 @@
   #include <stdio.h>
+  #include <stdlib.h>
   #include "array.h"
 /*
 typedef  int  data_t ;
@@ -46,7 +47,7 @@ int array_readdate(array*p , int n)
 //写函数，往位置上写入数据
 int array_writedate(array*p , int pos , data_t value)
 {
-  if(pos<0||pos>p->last-1||p->last>=N)
+  if(pos<0||pos>p->last||p->last>=N)
   {
     return 404;//插入失败
   }

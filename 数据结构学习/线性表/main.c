@@ -4,7 +4,7 @@
 
 int main()
 {
-    
+
     //外部定义指针
   array *parray1=getarray();
   arrayinit(parray1);

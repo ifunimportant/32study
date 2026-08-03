@@ -7,7 +7,7 @@ typedef  int  data_t ;
 //结构体声明
 typedef struct 
 {
-    data_t  sums[N];
+    data_t *sums;
     int last;
 } array,*arraypoint;
 //初始化，读取，写入肯定是对指针操作方便
@@ -15,14 +15,14 @@ typedef struct
 
 
 //申请一个数组，返回一个数组地址，这样使用的时候自己定义一个array指针赋值给他即可
-array * getarray();
+array * array_create();
 
 
 
 
 //初始化函数
 //传入的一个指针结构体，对他进行一些操作，但是不是他定义的
-void arrayinit(array * p);
+int arrayinit(array * p);
 
 
 

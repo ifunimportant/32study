@@ -6,7 +6,7 @@
  * 创建一个空顺序表，初始容量 MAX，满后每次扩容 ADD
  * 成功返回 sqlist*，失败返回 NULL
  */
-sqlist *createlist(void)
+sqlist *sqlist_create(void)
 {
     sqlist *p = (sqlist *)malloc(sizeof(sqlist));
     if (p == NULL) {
@@ -29,7 +29,7 @@ sqlist *createlist(void)
  * 初始化顺序表（仅将 length 置零，不释放空间）
  * 成功返回 capacity，失败返回 -1
  */
-int initlist(sqlist *l)
+int sqlist_clear(sqlist *l)
 {
     if (l == NULL) {
         printf("初始化失败: 顺序表为空\n");
@@ -44,7 +44,7 @@ int initlist(sqlist *l)
  * 查询 pos 位置上的元素并返回
  * 失败返回 -1（因此 elemtype 不要存负数）
  */
-elemtype listqueryelem(sqlist *l, int pos)
+elemtype sqlist_get(sqlist *l, int pos)
 {
     if (l == NULL || l->array == NULL) {
         printf("顺序表为空,返回-1\n");
@@ -61,7 +61,7 @@ elemtype listqueryelem(sqlist *l, int pos)
  * 查找 elem 首次出现的位置，返回位置编号
  * 未找到返回 0，顺序表错误返回 -1
  */
-int listlocateelem(sqlist *l, elemtype elem)
+int sqlist_find(sqlist *l, elemtype elem)
 {
     if (l == NULL || l->array == NULL) {
         printf("顺序表为空,返回-1\n");
@@ -95,7 +95,7 @@ static inline elemtype delete_internal(sqlist *l, int pos)
  * 删除第一个值为 elem 的元素，返回其位置
  * 未找到返回 0，顺序表错误返回 -1
  */
-int listdeleteelem(sqlist *l, elemtype elem)
+int sqlist_delete(sqlist *l, elemtype elem)
 {
     if (l == NULL || l->array == NULL) {
         printf("顺序表错误,返回-1\n");
@@ -115,7 +115,7 @@ int listdeleteelem(sqlist *l, elemtype elem)
 /*
  * 删除所有值为 elem 的元素
  */
-int listdeleteall(sqlist *l, elemtype elem)
+int sqlist_delete_all(sqlist *l, elemtype elem)
 {
     if (l == NULL || l->array == NULL) {
         printf("顺序表错误,返回-1\n");
@@ -134,7 +134,7 @@ int listdeleteall(sqlist *l, elemtype elem)
 /*
  * 删除 pos 位置上的元素
  */
-int listdeletepos(sqlist *l, int pos)
+int sqlist_delete_at(sqlist *l, int pos)
 {
     if (l == NULL || l->array == NULL) {
         printf("顺序表错误,返回-1\n");
@@ -152,7 +152,7 @@ int listdeletepos(sqlist *l, int pos)
  * 在 pos 位置插入 elem
  * 容量满时自动扩容，成功返回位置，失败返回 -1
  */
-int listinsertelem(sqlist *l, int pos, elemtype elem)
+int sqlist_insert(sqlist *l, int pos, elemtype elem)
 {
     if (l == NULL || l->array == NULL) {
         printf("顺序表错误,返回-1\n");
@@ -163,7 +163,7 @@ int listinsertelem(sqlist *l, int pos, elemtype elem)
         return -1;
     }
     if (l->capacity == l->length) {
-        if (expendsqlist(l, ADD) == NULL) {
+        if (sqlist_expand(l, ADD) == NULL) {
             printf("扩容失败, 无法插入\n");
             return -1;
         }
@@ -182,7 +182,7 @@ int listinsertelem(sqlist *l, int pos, elemtype elem)
 /*
  * 销毁顺序表，释放所有内存并将调用方指针置 NULL
  */
-int destroylist(sqlist **l)
+int sqlist_destroy(sqlist **l)
 {
     if (l == NULL || *l == NULL || (*l)->array == NULL) {
         printf("顺序表已释放或不存在\n");
@@ -198,26 +198,9 @@ int destroylist(sqlist **l)
 }
 
 /*
- * 按位置查询并打印（与 listqueryelem 功能相同，但会打印结果）
- */
-elemtype listsearchpos(sqlist *l, int pos)
-{
-    if (l == NULL || l->array == NULL) {
-        printf("顺序表错误,返回-1\n");
-        return -1;
-    }
-    if (pos < 1 || pos > l->length) {
-        printf("查询越界, 当前元素个数:%d\n", l->length);
-        return -1;
-    }
-    printf("第%d位元素:%"ELEM_FMT"\n", pos, l->array[pos - 1]);
-    return l->array[pos - 1];
-}
-
-/*
  * 统计 elem 出现的次数
  */
-int listcountelem(sqlist *l, elemtype elem)
+int sqlist_count(sqlist *l, elemtype elem)
 {
     if (l == NULL || l->array == NULL) {
         printf("顺序表错误,返回-1\n");
@@ -236,7 +219,7 @@ int listcountelem(sqlist *l, elemtype elem)
  * 找出 elem 所有出现的位置，存入 positions[]
  * 返回匹配个数（通过内部变量 count，遍历后打印）
  */
-int listsearchallelem(sqlist *l, elemtype elem, int positions[])
+int sqlist_find_all(sqlist *l, elemtype elem, int positions[])
 {
     if (l == NULL || l->array == NULL) {
         printf("顺序表错误,返回-1\n");
@@ -260,7 +243,7 @@ int listsearchallelem(sqlist *l, elemtype elem, int positions[])
  * 扩容：增加 add 个容量，保留原有数据
  * 成功返回 l，失败返回 NULL
  */
-sqlist *expendsqlist(sqlist *l, int add)
+sqlist *sqlist_expand(sqlist *l, int add)
 {
     if (l == NULL || l->array == NULL) {
         printf("扩容失败: 顺序表错误\n");
@@ -284,20 +267,20 @@ sqlist *expendsqlist(sqlist *l, int add)
 /*
  * 尾插：在顺序表末尾追加元素
  */
-int listtailinsert(sqlist *l, elemtype elem)
+int sqlist_push_back(sqlist *l, elemtype elem)
 {
-    return listinsertelem(l, l->length + 1, elem);
+    return sqlist_insert(l, l->length + 1, elem);
 }
 
 /*
  * 头插：在顺序表头部插入元素
  */
-int listfrontinsert(sqlist *l, elemtype elem)
+int sqlist_push_front(sqlist *l, elemtype elem)
 {
-    return listinsertelem(l, 1, elem);
+    return sqlist_insert(l, 1, elem);
 }
 
-int listshow(sqlist*l)
+int sqlist_show(sqlist*l)
 {
     if(l==NULL||l->array==NULL)
     {
@@ -319,7 +302,7 @@ int listshow(sqlist*l)
  * 排序：order='a' 升序, order='d' 降序
  * 非法 order 值返回 -1，不做任何排序
  */
-int listsort(sqlist *l, char order)
+int sqlist_sort(sqlist *l, char order)
 {
     if (l == NULL || l->array == NULL) {
         printf("排序失败: 顺序表错误\n");
@@ -376,7 +359,7 @@ int listsort(sqlist *l, char order)
 /*
  * 去除重复元素：保留第一次出现，删除后续重复
  */
-void listremovedup(sqlist *l)
+void sqlist_dedup(sqlist *l)
 {
     if (l == NULL || l->array == NULL) {
         printf("去重失败: 顺序表错误\n");
@@ -389,7 +372,7 @@ void listremovedup(sqlist *l)
                 removed++;
                 printf("发现重复:%"ELEM_FMT" 位置:%d 与 %d\n",
                        l->array[i], i + 1, j + 1);
-                listdeletepos(l, i + 1);
+                sqlist_delete_at(l, i + 1);
                 i--;
                 break;
             }
@@ -401,7 +384,7 @@ void listremovedup(sqlist *l)
 /*
  * 将 src 的全部元素合并到 dest 末尾，src 不会被释放
  */
-void listmerge(sqlist *dest, sqlist *src)
+void sqlist_merge(sqlist *dest, sqlist *src)
 {
     if (dest == NULL || src == NULL) {
         printf("合并失败: 顺序表错误\n");
@@ -411,13 +394,13 @@ void listmerge(sqlist *dest, sqlist *src)
     // 确保 dest 有足够容量
     int needed = dest->length + src->length;
     while (dest->capacity < needed) {
-        if (expendsqlist(dest, ADD) == NULL) {
+        if (sqlist_expand(dest, ADD) == NULL) {
             printf("合并失败: 扩容不足\n");
             return;
         }
     }
     for (int i = 0; i < src->length; i++) {
-        listtailinsert(dest, src->array[i]);
+        sqlist_push_back(dest, src->array[i]);
     }
     printf("--- 合并完成, 元素个数:%d ---\n", dest->length);
 }
